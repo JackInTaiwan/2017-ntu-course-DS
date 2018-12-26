@@ -1,0 +1,34 @@
+Logistic Regression : 0.917119565217
+Decision Tree : 0.92527173913
+svm : 0.926630434783
+nn : 0.9375
+(test_size=0.16)
+
+1.LR
+LogisticRegression(penalty='l2', multi_class='ovr', verbose=0, n_jobs=1)
+adjust C from 0.001 to 100
+adjust C from the above C/10 ~C*10 with 30 portions
+cross validation k =10
+
+2.Decision Tree
+DecisionTreeClassifier(criterion='gini', splitter='best',
+                                        min_samples_split=10,
+                                        max_features=None, max_leaf_nodes=None,
+                                        min_impurity_decrease=0.0)
+k = 10
+adjust max_depth from 2 to train_size ** 0.5
+adjust min_samples_split = range(2, train_size // k // 2, (train_size // k // 2 // 15) + 1)
+
+3.svmClassification
+SVC(kernel='rbf', C=1.0)
+standardization
+adjust gamma = [10 ** i for i in range(-4, 0)]
+adjust gamma = param_range_2 = np.linspace(param_gamma * 1.1 / 2, param_gamma * 11 / 2, num=10)
+
+4.neuralNetwork
+MLPC(hidden_layer_sizes=(50, 5), activation='logistic',
+                      solver='lbfgs', batch_size='auto',
+                      learning_rate='constant', learning_rate_init=0.001,
+                      max_iter=200, shuffle=True)
+standardization
+adjust alpha = param_range = [10 ** i for i in range(-5, 0)]
